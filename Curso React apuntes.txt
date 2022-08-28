@@ -1,0 +1,236 @@
+Entorno de desarrollo para React:
+
+	- Instalar Node.js -> Para levantar un servidor de desarrollo
+
+Crear un proyecto de React:
+
+	- En la consola parado en donde quiero crear el proyecto -> npx create-react-app {nombreProyecto}
+
+	- Se crea el proyecto y la consola me recomienda comandos:
+
+		- npm start -> Ejecuta un servidor de desarrollo para ir viendo los cambios hechos en el código
+
+		- npm run build -> Para construir o prepararla para producción al proyecto, se usa cuando se terminó se hacer el proyecto
+
+		- npm test -> Sirve para hacer testing de las interfaces de React
+
+		- npm run eject -> Elimina las configuraciones dadas por el comando create-react-app
+
+Ejecutar comandos:
+
+	- cd {carpeta del proyecto}
+
+	- npm start
+
+	- Abre una ventana en el navegador en el puerto 3000 del localhost
+
+Estructura del proyecto:
+
+	Src:
+
+		- En la carpeta src es donde se desarrolla el proyecto
+
+		- Al contrario de la creación de un proyecto tradicional, los archivos css, js y html se ponen en un mismo archivo en lugar de separarlos
+
+		- En el proyecto hay poco html ya que los que crean la interfaz de usuario son los .js
+
+		- index.js -> Importa módulos
+
+	Public:
+
+		- Tiene un  html en donde se carga la interfaz de nuestro proyecto
+
+	Package.json:
+
+		- Indica qué bibliotecas está usando nuestra aplicación
+
+		- Indica la lista de comandos que se pueden usar en React
+
+	Build:
+
+		- Se crea con el comando npm run build
+
+		- Es la carpeta final del proyecto. Es la que se sube para su uso una vez finalizado el desarrollo
+
+		- Comprime el código para mayor rendimiento
+
+	Node_modules:
+
+		- No se toca
+
+		- Es para que React funcione
+
+		- Contiene módulos para el funcionamiento interno de React
+
+	Package-lock.json:
+
+		- No se toca
+
+		- Es para hacer un seguimiento de los archivos que están instalados en node_modules
+
+Hola Mundo:
+
+	- Borrar todo el src
+
+	- Crear un src nuevo
+
+	- Crear index.js
+
+	- import React from "react" -> Importa la librería de React
+
+	- import ReactDom from "react-dom/client"-> Para indicarle a React que estoy trabajando para la web. Se importa para manipular el DOM -> Ya que React puede ser usado para la interfaz de aplicaciones móviles o de escritorio y también para crear aplicaciones móviles y de escritorio
+
+	- ReactDOM.createRoot(document.querySelector("#root")) -> Obtengo el div con id root del html de public para montar la aplicación ahí
+
+	- root.render(<h1>Hello world</h1>) -> render espera elementos hijos, elementos del html y los renderiza en el elemento root
+
+Componentes de React:
+
+	- Los componentes son partes de una interfaz más grande
+
+	- Son funciones que retornan interfaz
+
+	- Son reutilizables
+
+	- Se empieza con un componente inicial (componente root) -> Contiene a los demás componentes
+
+Primer componente:
+
+	//En React se pueden devolver porciones de interfaz
+	function Greeting () {
+	    return <h1>Hello World</h1>;
+	}
+
+	//render espera elementos hijos, elementos del html y los renderiza en el elemento root
+	//Para que reconozca el llamado al componente dentro de etiquetas html lo pongo entre {}
+	//Pero es mpas limpio llamar al componente como si fuera una etiqueta -> Si está todo en minúsculas no lo reconoce
+	root.render(<div>
+	    { Greeting() }
+	    <Greeting></Greeting>
+	</div>);
+
+JSX:
+
+	- Se puede utilizar directamente tags html en el código js sin ponerlo entre comillas
+
+	- JSX es una combinación de js y html
+
+	- Tiene una etiqueta especial llamada <fragment> -> Elimina el contenido de los tags div que se utiliza en el render para no crear un div de más:
+		root.render(<>
+	    { Greeting() }
+	    <Greeting></Greeting>
+		</>);
+
+Ecmascript Modules:
+
+	- Se divide el proyecto en varias partes
+
+	- Se usan las instrucciones export e import
+
+	- Export -> Exporta el componente para que sea utilizado en otros archivos
+
+	- Import -> Extrae componentes exportados
+
+Extensión JS:
+
+	Create-react-app:
+
+		- Reconoce cuándo se exporta componentes y cuando js
+
+		- A los archivos js se le puede cambiar la extensión por .jsx si se sabe que el archivo maneja componentes y no sólo código js
+
+		- No hace ningún cambio, solo es para que el desarrollador sea consciente de lo que exportan los archivos
+
+	Vite:
+
+		- Solicita que se use la extensión .jsx
+
+Props:
+
+	- Los props permiten saber como cambiar los datos internamente en un componente
+
+	- Se pasan por parámetro en la etiqueta del componente dentro del render() como si fueran propiedades de una etiqueta html
+
+	- En la función se especifica que parámetro o tipo se parámetro que se espera y dentro de esta manipular la propiedad
+
+	- Se puede pasar como parámetro strings, números, booleans, arreglos, objetos, ffunciones, etc
+
+Default props - Prop types:
+
+	- Los proptypes añaden tipos de datos a los props -> Es decir, se avisa el tipo de dato que se requiere pasar por parámetro
+
+	- Con el comando npm i prop-types se instala el módulo prop-types
+
+	- Después se importa en el archivo que lo requiera
+
+	- import PropTypes from "prop-types"
+
+	- Ahora se puede definir que datos se va a poder recibir como parámetro en una función -> Button.propTypes = {
+		text: PropTypes.string;
+	}
+
+	- También se puede pedir que el parámetro deba ser pasado obligatoriamente ->
+	Button.propTypes = {
+		text: PropTypes.string.isRequired;
+	}
+
+	- También se puede definir un valor por defecto para los parámetros de una forma distinta ->
+	Button.defaultProp = {
+		text: "Some user";
+	}
+
+Estilos de componentes:
+
+	Opción 1:
+
+		- Se pueden agregar estilo inline en las etiquetas html ->
+		<div style={{background: "grey", color: "white"}}><p>A</p></div>
+
+	Opción 2:
+
+		- O guardar esos estilos en una variable y agregarlo al atributo style ->
+		const style = {background: "grey", color: "white"}
+		<div style={style}><p>A</p></div>
+
+	Opción 3:
+
+		- También se puede crear un archivo css en la carpeta src
+
+		- El html NO es el que carga el css
+
+		- El css se importa en los archivos js -> Es posible ya que create-react-app tiene un programa que maneja la carga de estilos e imágenes
+
+		- import "./style.css"
+
+		- En el archivo css se crea una clase con estilos
+
+		- Luego se aplica la clase a un elemento hmtl ->
+		<div className="clase"><p>A</p></div>
+
+		- También se pueden condicionar los estilo ->
+		<div className={condicion ? "clase" : "clase2"}><p>A</p></div>
+
+Tipos de componentes :
+
+	- Se pueden crear componentes en base a clases en lugar de solo funciones ->
+	import {Component} from "react"; //Se importa la clase componente
+
+	export class SayHello extends Component { //Se crea la clase especificando a Component como su padre
+	    render() {
+	        return <h1>I say hello!</h1>
+	    }
+	}
+
+	- Es más común utilizar componentes basados en funciones -> Es más fácil de entender y usa funcionalidades ya aplicadas en React
+
+	- Los componentes basados en clases fueron la primera implementación, por lo tanto vendría siendo código antiguo de React
+
+Event handlers:
+
+	- Se ejecuta código al ocurrir un evento
+
+	- Por defecto los formularios al hacer submit recargan la página ya que su comportamiento predeterminado es enviar datos a un servidor. Pero en React no es así, por lo tanto se tiene que evitar este comportamiento por default -> e.preventDefault();
+
+API fetch():
+
+	- 

@@ -1,0 +1,15 @@
+.card, .card2 {
+    width: fit-content;
+}
+.card {
+    background-color: rgb(115, 152, 201);
+    color: white;
+}
+.card2 {
+    background-color: blanchedalmond;
+    color: brown;
+}
+.tasksDiv {
+    background-color: rgb(148, 219, 195);
+    width: 50%;
+}
