@@ -1,3 +1,5 @@
+import { VscBug } from "react-icons/vsc";
+
 //Otra forma de declarar un componente. No hay ninguna diferencia en usar un declaración u otra
 /* export const Posts = () => {
 
@@ -13,6 +15,7 @@
 export const Posts = ({getData}) => {
 
     return <button onClick={getData}>
+        <VscBug/>
         Traer datos
     </button>
 }
