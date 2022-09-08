@@ -1,4 +1,4 @@
-import React from "react"; //Importa librería React
+import React, { useState } from "react"; //Importa librería React
 import ReactDOM from "react-dom/client"; //Importa ReactDOM para indicar que trabajo en una aplicación web y para manipular el DOM
 import { Greeting, UserCard } from "./Greeting"; //No es necesario el .js porque la herramienta create-react-app ya importa automáticamente las extensiones
 import Product, { Parrafo } from "./Product";
@@ -34,13 +34,28 @@ const users = [
   }
 ]
 
+function Counter() {
+
+  let [counter, setCounter] = useState(0);
+
+  return <div>
+    <h1>Contador: {counter}</h1>
+    <button onClick={() => {
+      setCounter(counter + 1);
+    }}>
+      Sumar
+    </button>
+  </div>
+}
+
 root.render(
   <>
+    <Counter />
     { //Por cada item del arreglo devuelve un div. La key es necesaria para que React identifique al item con un identificador
       users.map((user, i) => {
         return <div key={i}>
           <h2>{user.name}</h2>
-          <img src={user.image} />
+          <img src={user.image} alt="Imagen de usuario" />
         </div>
       })
     }
