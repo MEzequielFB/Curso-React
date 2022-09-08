@@ -34,9 +34,21 @@ const users = [
   }
 ]
 
+function Message() {
+
+  let [message, setMessage] = useState("");
+
+  return <div>
+    <input type="text" onChange={(e) => setMessage(e.target.value)} />
+    <button onClick={() => alert("El mensaje es: " + message)}>
+      Guardar
+    </button>
+  </div>
+}
+
 function Counter() {
 
-  let [counter, setCounter] = useState(0);
+  let [counter, setCounter] = useState(0); //0 valor inicial
 
   return <div>
     <h1>Contador: {counter}</h1>
@@ -45,11 +57,22 @@ function Counter() {
     }}>
       Sumar
     </button>
+    <button onClick={() => {
+      setCounter(counter - 1);
+    }}>
+      Restar
+    </button>
+    <button onClick={() => {
+      setCounter(0);
+    }}>
+      Reiniciar
+    </button>
   </div>
 }
 
 root.render(
   <>
+    <Message />
     <Counter />
     { //Por cada item del arreglo devuelve un div. La key es necesaria para que React identifique al item con un identificador
       users.map((user, i) => {
