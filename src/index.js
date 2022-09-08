@@ -21,8 +21,29 @@ function handleChange(e) { //Función del input:text
   console.log(e.target.value);
 }
 
+const users = [
+  {
+    "id": 1,
+    "name": "Matias Eze",
+    "image": "https://robohash.org/user1"
+  },
+  {
+    "id": 2,
+    "name": "Fer Fernando",
+    "image": "https://robohash.org/user2"
+  }
+]
+
 root.render(
   <>
+    { //Por cada item del arreglo devuelve un div. La key es necesaria para que React identifique al item con un identificador
+      users.map((user, i) => {
+        return <div key={i}>
+          <h2>{user.name}</h2>
+          <img src={user.image} />
+        </div>
+      })
+    }
     <Posts
       getData={async () => {
         try {
