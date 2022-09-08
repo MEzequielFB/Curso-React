@@ -5,6 +5,7 @@ import Product, { Parrafo } from "./Product";
 import { Button } from "./Button";
 import { TaskCard } from "./Task";
 import { SayHello } from "./SayHello";
+import { Posts } from "./Posts";
 
 //Obtengo el div con id root del html de public para montar la aplicación ahí
 //Crea elemento root
@@ -22,6 +23,21 @@ function handleChange(e) { //Función del input:text
 
 root.render(
   <>
+    <Posts
+      getData={async () => {
+        try {
+            let response = await fetch("https://jsonplaceholder.typicode.com/posts");
+            if (response.ok) {
+
+                let data = await response.json();
+                console.log(data);
+            }
+        }
+        catch(error) {
+            console.log(error);
+        }
+      }}
+    />
     <Button
       text="Un texto"
     />
