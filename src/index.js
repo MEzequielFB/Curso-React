@@ -1,4 +1,4 @@
-import React, { useState } from "react"; //Importa librería React
+import React, { useState, useEffect } from "react"; //Importa librería React
 import ReactDOM from "react-dom/client"; //Importa ReactDOM para indicar que trabajo en una aplicación web y para manipular el DOM
 import { Greeting, UserCard } from "./Greeting"; //No es necesario el .js porque la herramienta create-react-app ya importa automáticamente las extensiones
 import Product, { Parrafo } from "./Product";
@@ -37,6 +37,10 @@ const users = [
 function Message() {
 
   let [message, setMessage] = useState("");
+
+  useEffect(() => { //Este useEffect es dependiende del estado de message
+    console.log("render");
+  }, [ message ])
 
   return <div>
     <input type="text" onChange={(e) => setMessage(e.target.value)} />
